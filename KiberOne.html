@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Школа программирования</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .transition-all { transition: all 0.3s ease; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
+
+    <header class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-40">
+        <nav class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="bg-blue-600 text-white w-10 h-10 rounded-xl flex items-center justify-center font-bold text-lg">К</div>
+                <span class="font-medium text-slate-600 hidden sm:block">Детская школа программирования</span>
+            </div>
+            <div class="flex items-center space-x-2 md:space-x-4">
+                <div class="flex bg-slate-100 rounded-full p-1 text-sm md:text-base">
+                    <button onclick="showPage('home')" id="btn-home" class="px-3 md:px-4 py-2 rounded-full font-medium transition-all">Главная</button>
+                    <button onclick="showPage('details')" id="btn-details" class="px-3 md:px-4 py-2 rounded-full font-medium transition-all">Сведения</button>
+                    <button onclick="showPage('education')" id="btn-edu" class="px-3 md:px-4 py-2 rounded-full font-medium transition-all">Образование</button>
+                </div>
+                <button onclick="openModal()" class="bg-blue-600 text-white px-4 md:px-5 py-2 rounded-full font-medium hover:bg-blue-700 transition-all text-sm md:text-base">Связаться</button>
+            </div>
+        </nav>
+    </header>
+
+    <main id="app" class="flex-grow max-w-5xl mx-auto w-full px-4 py-8">
+    </main>
+
+    <div id="contact-modal" class="fixed inset-0 bg-slate-900/50 flex items-center justify-center z-50 hidden p-4 animate-in fade-in duration-300">
+        <div class="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl relative">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <h3 class="text-xl font-bold mb-6">Контакты для связи</h3>
+            <div class="space-y-4">
+                <div class="flex justify-between items-center border-b pb-4">
+                    <p class="text-slate-500">Телефон</p>
+                    <a href="tel:+79892611818" class="font-medium text-blue-600">+7 (989) 261-18-18</a>
+                </div>
+                <div class="flex justify-between items-center">
+                    <p class="text-slate-500">Почта</p>
+                    <a href="mailto:georgievsk@kiber1.com" class="font-medium text-blue-600">georgievsk@kiber1.com</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center py-6 text-slate-500 text-sm border-t border-slate-200">
+        © 2026 Школа программирования
+    </footer>
+
+    <script>
+        const pages = {
+            home: `
+                <div class="flex flex-col md:flex-row items-center justify-between gap-12 animate-in fade-in duration-500 py-10">
+                    <div class="max-w-xl">
+                        <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">Школа программирования</h1>
+                    </div>
+                    <div class="w-full max-w-sm bg-white p-4 rounded-3xl shadow-lg border border-slate-100 flex items-center justify-center">
+                        <img src="computer.jpg" alt="Компьютер" class="w-full h-auto object-contain p-2" onerror="this.src='https://i.ibb.co/nC5R0wF/image.png'">
+                    </div>
+                </div>
+            `,
+            details: `
+                <div class="space-y-6 animate-in slide-in-from-bottom-4 duration-500">
+                    <h2 class="text-3xl font-bold mb-6">Сведения об образовательной организации</h2>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="border-b pb-4"><p class="text-xs text-slate-400 uppercase tracking-wider mb-1">Наименование</p><p class="font-medium">ИНДИВИДУАЛЬНЫЙ ПРЕДПРИНИМАТЕЛЬ ПРОРОКОВА АНЖЕЛИКА АНДРЕЕВНА</p></div>
+                            <div class="border-b pb-4"><p class="text-xs text-slate-400 uppercase tracking-wider mb-1">ОГРНИП</p><p class="font-medium">325344300018867</p></div>
+                            <div class="border-b pb-4"><p class="text-xs text-slate-400 uppercase tracking-wider mb-1">ИНН</p><p class="font-medium">340202721680</p></div>
+                            <div class="border-b pb-4"><p class="text-xs text-slate-400 uppercase tracking-wider mb-1">Образовательная лицензия</p><p class="font-medium">№</p></div>
+                            <div class="border-b pb-4"><p class="text-xs text-slate-400 uppercase tracking-wider mb-1">Телефон</p><p class="font-medium text-blue-600">+7 (989) 261-18-18</p></div>
+                            <div class="border-b pb-4"><p class="text-xs text-slate-400 uppercase tracking-wider mb-1">Эл. почта</p><p class="font-medium text-blue-600">georgievsk@kiber1.com</p></div>
+                            <div class="md:col-span-2"><p class="text-xs text-slate-400 uppercase tracking-wider mb-1">Юр. адрес</p><p class="font-medium">Волгоградская область, город Волжский, улица Академика Королева, дом 14, кв. 27</p></div>
+                        </div>
+                    </div>
+                </div>
+            `,
+            education: `
+                <div class="animate-in slide-in-from-bottom-4 duration-500">
+                    <h2 class="text-3xl font-bold mb-8">Образование</h2>
+                    <h3 class="text-2xl font-bold mb-6">Литература</h3>
+                    <div class="grid grid-cols-1 gap-6 mb-12">
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                            <h3 class="font-bold text-lg mb-4">Scratch для детей. Самоучитель по программированию Мажет Марже.</h3>
+                            <a href="https://drive.google.com/file/d/1_DSq6b2pjg2-LpN2Y_wjnlDgfNHEBMC8/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700">Открыть документ</a>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                            <h3 class="font-bold text-lg mb-4">Программирование на Scratch 2. Делаем игры и мультики. Голиков Д.</h3>
+                            <a href="https://drive.google.com/file/d/1d0k6BM19t0z-g6P20gtv_I_JWuL2azsu/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700">Открыть документ</a>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                            <h3 class="font-bold text-lg mb-4">Scratch для учителей и родителей. Знакомство с популярной детской средой программирования. Голиков Д.</h3>
+                            <a href="https://drive.google.com/file/d/1MT-apSDpBder7xKYflXt44U0W39CX0O2/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700">Открыть документ</a>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                            <h3 class="font-bold text-lg mb-4">Голиков Д. Голиков А. Программирование на Scratch 2. Часть 2. Делаем сложные игры.</h3>
+                            <a href="https://drive.google.com/file/d/11NOdWmZZEO_EkTkvyJ0RmtVtonob6Qsi/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700">Открыть документ</a>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-6">Учебная программа</h3>
+                    <div class="grid grid-cols-1 gap-6 mb-12">
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                            <h3 class="font-bold text-lg mb-4">Учебная программа</h3>
+                            <a href="https://drive.google.com/file/d/1wJIXGkgpCPAkCvcZ5oFDVNh6wFLh6efP/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700">Открыть документ</a>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-6">Тесты</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="tests-grid">
+                    </div>
+                </div>
+            `
+        };
+
+        const tests = [
+            { name: 'Тема 1.1', url: 'https://drive.google.com/file/d/1ePRx_sjtJy0ykDPWwBf0QOzwapdnQNR_/view?usp=drive_link' },
+            { name: 'Тема 1.2', url: 'https://drive.google.com/file/d/1AzVkU5U5Lacn7GqIKc_p6fNiQ0iHKg1i/view?usp=drive_link' },
+            { name: 'Тема 2', url: 'https://drive.google.com/file/d/1sASwpahV46gObEJEyp_H_vnVCiLEIgZD/view?usp=drive_link' },
+            { name: 'Тема 3', url: 'https://drive.google.com/file/d/1IrBjILGMhWh0NVYHC9D-7tvQmuT035_h/view?usp=drive_link' },
+            { name: 'Тема 4', url: 'https://drive.google.com/file/d/1fPgsfulyEPnILwgxfWiQKA0DXc0SOZGk/view?usp=drive_link' },
+            { name: 'Тема 5', url: 'https://drive.google.com/file/d/1z_7k-iSuoyrAC3PXYde-ezIlfvJL0-b9/view?usp=drive_link' },
+            { name: 'Тема 6.1', url: 'https://drive.google.com/file/d/15d0VokGB3gfC3nzGLfgqMiLvMF4_ByQ8/view?usp=drive_link' },
+            { name: 'Тема 6.2', url: 'https://drive.google.com/file/d/1ao_v-yY7IiVtDk0deQ2IMSZ_gXoOX6SE/view?usp=drive_link' }
+        ];
+
+        function showPage(pageId) {
+            const app = document.getElementById('app');
+            app.innerHTML = pages[pageId];
+            
+            // Если мы в образовании, заполняем тесты
+            if(pageId === 'education') {
+                const grid = document.getElementById('tests-grid');
+                grid.innerHTML = tests.map(test => `
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                        <h3 class="font-bold text-lg mb-4">${test.name}</h3>
+                        <a href="${test.url}" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700">Открыть документ</a>
+                    </div>
+                `).join('');
+            }
+
+            document.querySelectorAll('button[id^="btn-"]').forEach(btn => btn.classList.remove('bg-white', 'shadow-sm'));
+            document.getElementById('btn-' + (pageId === 'education' ? 'edu' : pageId)).classList.add('bg-white', 'shadow-sm');
+            window.scrollTo(0, 0);
+        }
+        function openModal() { document.getElementById('contact-modal').classList.remove('hidden'); }
+        function closeModal() { document.getElementById('contact-modal').classList.add('hidden'); }
+        window.onload = () => showPage('home');
+    </script>
+</body>
+</html>
