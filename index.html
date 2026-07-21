@@ -114,6 +114,13 @@
                             <a href="https://drive.google.com/file/d/1wJIXGkgpCPAkCvcZ5oFDVNh6wFLh6efP/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700">Открыть документ</a>
                         </div>
                     </div>
+                    <h3 class="text-2xl font-bold mb-6">Документ</h3>
+                    <div class="grid grid-cols-1 gap-6 mb-12">
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                            <h3 class="font-bold text-lg mb-4">Документ</h3>
+                            <a href="https://docs.google.com/document/d/1Qf_DMugmHjAlhCVFqlp2QiBMBNa3xLX9/edit?usp=drive_link&ouid=106510731050929884897&rtpof=true&sd=true" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700">Открыть документ</a>
+                        </div>
+                    </div>
                     <h3 class="text-2xl font-bold mb-6">Тесты</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="tests-grid">
                     </div>
@@ -136,7 +143,6 @@
             const app = document.getElementById('app');
             app.innerHTML = pages[pageId];
             
-            // Если мы в образовании, заполняем тесты
             if(pageId === 'education') {
                 const grid = document.getElementById('tests-grid');
                 grid.innerHTML = tests.map(test => `
